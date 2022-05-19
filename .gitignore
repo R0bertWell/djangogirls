@@ -145,3 +145,4 @@ myvenv
 /static
 .DS_Store
 .idea/
+.idea
