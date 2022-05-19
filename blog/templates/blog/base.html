@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&amp;;700display=swap" rel="stylesheet">
+    <link href="{% static '/css/blog.css' %}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>R0bert.code</title>
+</head>
+<body>
+    <div class="background-grid">
+            <div class="bg-1">{% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_signup' %}">Cadastro</a>
+                </li>
+                {% endif %}</div>
+        <div class="grid-container">
+            <header class="main-header-post">
+                <nav>
+                    <li><i class="fab fa-rust"></i></li>
+                    <li><a href="{% url 'blog:post_list' %}"><h2>R0bert.code</h2></a></li>
+                    <li><a href="{% url 'home:home' %}"><h3>Home</h3></a></li>
+                </nav><!--logo-->
+                <div class="new-post">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'blog:post_list_by_author' user.id %}">My posts</a>
+                        </li>
+                        <a href="{% url 'blog:post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus">New Post</span></a>
+                    {% endif %}
+                </div>
+            </header>
+            <aside class="main-aside-post">
+                {% block resumecontent %}
+                {% endblock %}
+            </aside>
+            <div class="main-post-title">{% block fullcontenttop %}{% endblock %}</div>
+            <main class="main-post">
+                {% block fullcontent %}
+                {% endblock %}
+            </main>
+        </div>
+        <div class="bg-2"></div>
+    </div>
+    <script src="https://kit.fontawesome.com/51f7ea6787.js" crossorigin="anonymous"></script>
+</body>
+</html>
