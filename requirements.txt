@@ -14,5 +14,9 @@ pytest-django==4.1.0
 # widget_tweaks
 django-widget-tweaks==1.4.8
 
+# django-crispy
+django-crispy-forms==1.11.0
+django-localflavor==3.0.1
+
 #allauth
 django-allauth==0.50.0
