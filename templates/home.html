@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock stylesheet %}
+
+{% block title %}R0bert.code{% endblock %}
+
+{% block header %}
+<header>
+    <h2>R0bert.code</h2>
+    <nav>
+        <li><a href="{% url 'home:projetos' %}">Projetos</a></li>
+        <li><a href="{% url 'blog:post_list' %}">Blog</a></li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_signup' %}">Cadastro</a>
+        </li>
+        {% endif %}
+    </nav>
+</header>
+{% endblock header %}
+{% block my-section %}
+<section class="hero-bg">
+    <img src="/static/images/my-photo.png" alt="my-photo">
+    <h2>Wellington : My Profiles</h2>
+    <p>I am r0bertwell -dev</p>
+    <nav>
+        <li>
+            <a href="https://github.com/r0bertwell" target="_blank"><i id="github" class="fab fa-github-square"></i></a>
+            <p>GitHub</p>
+        </li>
+        <li>
+            <a href="https://www.instagram.com/r0bertwell/" target="_blank"><i id="instagram" class="fab fa-instagram-square"></i></a>
+            <p>Instagram</p>
+        </li>
+        <li>
+            <a href="https://www.linkedin.com/in/r0bertwell/" target="_blank"><i id="linkedin" class="fab fa-linkedin"></i></a>
+            <p>LinkedIn</p>
+        </li>
+        <li>
+            <a href="https://www.youtube.com/dr4gongames" target="_blank"><i id="youtube" class="fab fa-youtube"></i></a>
+            <p>Youtube</p>
+        </li>
+    </nav>
+</section>
+{% endblock my-section %}
+
+{% block content %}
+{% endblock %}
