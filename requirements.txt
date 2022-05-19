@@ -13,3 +13,6 @@ pytest-django==4.1.0
 
 # widget_tweaks
 django-widget-tweaks==1.4.8
+
+#allauth
+django-allauth==0.50.0
