@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u37mzy7x+4ia=34$w)n4h$ow0m*!9n69fnk_lbxmnkr92kn+rf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'pystore.apps.PystoreConfig',
     'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
     # 3rd apps
     # The following apps are required:
     'debug_toolbar.apps.DebugToolbarConfig',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'widget_tweaks',
+    'localflavor',
 ]
 
 # Provider specific settings
@@ -202,3 +204,4 @@ INTERNAL_IPS = [
 
 # cart
 CART_ITEM_MAX_QUANTITY = 20
+CART_SESSION_ID = 'cart'
