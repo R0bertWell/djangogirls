@@ -4,7 +4,11 @@
 {% load product_tags %}
 
 {% block title %}
-Produtos
+{% if category %}
+    {{category}}
+{% else %}
+    Produtos
+{% endif %}
 {% endblock title %}
 
 {% block content %}

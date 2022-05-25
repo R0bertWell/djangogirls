@@ -1,0 +1,14 @@
+{% extends 'pystore/pystore_base.html' %}
+
+{% block title %} Pedido Realizado {% endblock title %}
+
+{% block content %}
+
+<div class="container my-3">
+    <h1 class="font-weight-bold">Pedido realizado</h1>
+    <p>Parabéns <strong>{{order.name}}</strong>, seu pedido foi finalizado, acompanhe pela aba de pedidos.</p>
+    <p>O número do seu pedido é <strong>{{ order.id }}</strong>.</p>
+    <p>O pagamento fica para a próxima aula!</p>
+</div>
+
+{% endblock content %}
