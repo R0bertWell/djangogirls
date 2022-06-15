@@ -1,0 +1,56 @@
+{% extends 'pystore/pystore_base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Checkout{% endblock title %}
+
+{% block content %}
+<div class="container my-3">
+    <div class="card border-0 bg-light p-4">
+        {% for ord in order %}
+        <h4 style="text-align:center">{{ord}}</h4>
+        <div class="container my-4">
+            <li class="list-group-item bg-dark">
+                <strong><h3 style="color:white">Payment</h3></strong>
+                <button id="pay-button" onclick="expand()">TESTE</button>
+            </li>
+            <div id="payment">
+                <li class="list-group-item bg-light">
+                    {% for payment in ord.payments.all %} 
+    
+                    Pagamento: {{payment.mercado_pago_id}} <br>
+                    Status: {{payment.mercado_pago_status}} <br>
+                    Detail: {{payment.mercado_pago_status_detail}} <br>
+                    Tipo de pagamento: {{payment.payment_method_id}} <br>
+                    Parcelas: {{payment.installments}} <br>
+                    CPF : {{payment.doc_number}}
+                    {% endfor %}
+                </li>
+            </div>
+            <li class="list-group-item bg-dark">
+                <strong><h3 style="color:white">Items</h3></strong>
+            </li>
+            {% for item in ord.items.all %}
+            <li class="list-group-item bg-light">
+                {{ item.quantity }}x <a href="{{item.product.get_absolute_url}}">{{ item.product.name }}</a>
+                <span class="float-right">R$ {{ item.get_total_price }}</span>
+            </li>
+            {% endfor %}
+            <li class="font-weight-bold list-group-item bg-light">Total
+                <span class="float-right">R$ {{ ord.get_total_price }}</span>
+            </li>
+        </div>
+        <div class="container my-2">
+            {{ord.user}}
+            {{ord.cpf}}
+            {{ord.email}}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/order-list.js' %}"></script>
+{% endblock script %}

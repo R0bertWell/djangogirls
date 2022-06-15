@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.urls import reverse
+import datetime
 
 
 class Post(models.Model):
@@ -23,3 +24,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'pk': self.pk})
+
+    def get_pub_date_format(self):
+        return str(self.published_date.strftime('%d/%b/%y'))

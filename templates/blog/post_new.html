@@ -1,12 +1,14 @@
 {% extends 'blog/base.html' %}
 
+{% load static %}
+
 {% block fullcontenttop %}
-    <h2>New post</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+    {{ form.title }}
 {% endblock fullcontenttop %}
 {% block fullcontent %}
     
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+        {{ form.text }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock fullcontent %}
@@ -14,11 +16,22 @@
 {% block resumecontent %}
     {% for post in posts %}
         <div class="post-resume">
-            <div class="date">
-                <p>published: {{ post.published_date }} by <a href="{{post.get_author_absolute_url}}">{{ post.author }}</a></p>
+            <div class="post-author-img">
+                {% if post.author.image %}
+                <a href="{{post.get_author_absolute_url}}"><img class="post-img" src="/media/{{post.author.image}}"></a>
+                {% else %}
+                <a href="{{post.get_author_absolute_url}}"><img class="post-img" src="{% static 'images/default_user.jpg' %}"></a>
+                {% endif %}
             </div>
-            <h2><a href="{{post.get_absolute_url}}">{{ post.title }}</a></h2>
-            <p> {{ post.text|linebreaksbr| truncatewords:5 }}</p>
+            <div class="post-resume-content">
+                <div class="resume-content">
+                    <h2><a href="{{post.get_absolute_url}}">{{ post.title }}</a></h2>
+                    <p> {{ post.text|linebreaksbr| truncatewords:5 }}</p>
+                </div>
+                <div class="date">
+                    <p>{{ post.get_pub_date_format }}</a></p>
+                </div>
+            </div>
         </div>
     {% endfor %}
-{% endblock resumecontent %}
+{% endblock %}
