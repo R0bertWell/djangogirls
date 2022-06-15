@@ -1,0 +1,34 @@
+{% extends 'pystore/pystore_base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Checkout{% endblock title %}
+
+{% block content %}
+<div class="container my-3">
+    <div class="card border-0 bg-light p-4">
+        <h4 style="text-align:center">Pedidos</h4>
+        {% for order in order_list %}
+        <div class="container my-4">
+            <li class="list-group-item bg-light">
+                <a href="{{order.get_absolute_url}}"><strong><h3>{{order}}</h3></strong></a>
+                {% for payment in order.payments.all %} Pagamento: <strong>(({{payment.mercado_pago_status}}))</strong> {% endfor %}
+            </li>
+            {% for item in order.items.all %}
+            <li class="list-group-item bg-light">
+                {{ item.quantity }}x <a href="{{item.product.get_absolute_url}}">{{ item.product.name }}</a>
+                <span class="float-right">R$ {{ item.get_total_price }}</span>
+            </li>
+            {% endfor %}
+            <li class="font-weight-bold list-group-item bg-light">Total
+                <span class="float-right">R$ {{ order.get_total_price }}</span>
+            </li>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

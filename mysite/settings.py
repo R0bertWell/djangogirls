@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+
+import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -45,6 +47,8 @@ INSTALLED_APPS = [
     'pystore.apps.PystoreConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'users.apps.UsersConfig',
+    'payments.apps.PaymentsConfig',
     # 3rd apps
     # The following apps are required:
     'debug_toolbar.apps.DebugToolbarConfig',
@@ -162,6 +166,11 @@ STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# User Model
+
+AUTH_USER_MODEL = 'users.User'
+
+
 # django-all-auth
 
 AUTHENTICATION_BACKENDS = [
@@ -205,3 +214,9 @@ INTERNAL_IPS = [
 # cart
 CART_ITEM_MAX_QUANTITY = 20
 CART_SESSION_ID = 'cart'
+
+# mercadopago (env)
+env = environ.Env()
+env.read_env(str(BASE_DIR / '.env'))
+MERCADO_PAGO_PUBLIC_KEY = env('MERCADO_PAGO_PUBLIC_KEY')
+MERCADO_PAGO_ACCESS_TOKEN = env('MERCADO_PAGO_ACCESS_TOKEN')

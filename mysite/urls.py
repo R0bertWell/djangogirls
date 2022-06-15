@@ -31,6 +31,7 @@ urlpatterns = [
     path('pystore/', include('pystore.urls', namespace='pystore')),
     path('pystore/cart/', include('cart.urls', namespace='cart')),
     path('pystore/orders/', include('orders.urls', namespace='orders')),
+    path('pystore/payments/', include('payments.urls', namespace='payments')),
 ]
 
 if settings.DEBUG:

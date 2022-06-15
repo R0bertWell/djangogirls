@@ -28,6 +28,21 @@
                     <li class="nav-item">
                         <a href="{% url 'cart:detail' %}" class="nav-link lead mr-4 font-weight-bold">Meu Carrinho</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'orders:list' %}" class="nav-link lead mr-4 font-weight-bold">Meus Pedidos</a>
+                    </li>
+                    <a class="nav-item" href="{% url 'pystore:logout' %}">
+                        <i class="fa-solid fa-right-from-bracket nav-link lead mr-4">Sair</i>
+                    </a>
+                    {% else %}
+                    <a class="nav-item" href="{% url 'pystore:login' %}">
+                        <i class="fa-solid fa-right-to-bracket nav-link lead mr-4">Login</i>
+                    </a>
+                    <a class="nav-item" href="{% url 'pystore:signup' %}">
+                        <i class="fa-solid fa-user-plus nav-link lead mr-4">Cadastro</i>
+                    </a>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -44,6 +59,7 @@
         crossorigin="anonymous"></script>
 
     {% block script %}
+    <script src="https://kit.fontawesome.com/51f7ea6787.js" crossorigin="anonymous"></script>
     {% endblock script %}
 
 </body>

@@ -1,28 +1,30 @@
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from django.utils import timezone
-from django.contrib.auth.models import User
+from users.models import User
 from .forms import PostForm
 
 
 def post_list(request, author=None):
     if author:
         author_id = get_object_or_404(User, pk=author)
-        posts = Post.objects.filter(author=author_id).order_by('published_date')
+
+        posts = Post.objects.filter(author=author_id).order_by('-published_date')
     else:
-        posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+        posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 
 def post_detail(request, pk):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     post = get_object_or_404(Post, pk=pk)
 
     return render(request, 'blog/post_detail.html', {'post': post, 'posts': posts})
 
 
 def post_edit(request, pk):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     post = get_object_or_404(Post, pk=pk)
 
     if request.method == "POST":
@@ -39,7 +41,7 @@ def post_edit(request, pk):
 
 
 def post_new(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
     if request.method == 'POST':
         form = PostForm(request.POST)
